@@ -1,0 +1,156 @@
+.header {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #00a8ff;
+  padding: 0 20px 0 40px;
+  margin: 0;
+  box-sizing: border-box;
+  z-index: 5;
+}
+
+.header button {
+  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
+}
+
+.logo {
+  margin-right: 50px;
+}
+
+.header .add-v-form {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-right: 50px;
+}
+
+.header .add-v-form i {
+  margin-right: -28px;
+  z-index: 100;
+  color: grey;
+}
+
+.header .add-v-box {
+  padding: 8px 10px 8px 35px;
+  width: 230px;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  background: white;
+  border-radius: 5px;
+  margin-right: 8px;
+}
+
+.header .add-v-btn {
+  padding: 8px 30px;
+  color: white;
+  background: #2980b9;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.header .social-link {
+  margin-left: auto;
+}
+
+.header .social-link a {
+  padding: 5px 6px;
+  background: #3498db;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.header .social-link i {
+  margin-right: 4px;
+  font-size: 14px;
+}
+
+.header .lsb-container {
+  display: none;
+}
+
+.header .little-search-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  padding: 8px;
+}
+
+.header .apd-search-section {
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background: #00a8ff;
+}
+
+.header .apd-search-form {
+  display: flex;
+  justify-content: center;
+}
+
+.header .apd-search-box {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 4px 10px;
+  flex: 1;
+}
+
+.header .apd-search-btn {
+  border: none;
+  background: none;
+  margin-left: auto;
+  margin-right: 10px;
+  font-size: 18px;
+  color: white;
+}
+
+.header .apd-search-box::placeholder {
+  color: white;
+  font-weight: 600;
+}
+
+@media (max-width: 830px) {
+  .header .logo {
+    margin-right: 30px;
+  }
+  .header .add-v-form {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .header .social-link {
+    display: none;
+  }
+}
+
+@media (max-width: 650px) {
+  .header {
+    padding: 10px;
+  }
+  .header .add-v-form {
+    display: none;
+  }
+  .header .lsb-container {
+    display: block;
+    margin-left: auto;
+  }
+  .header .apd-search-section {
+    display: block;
+  }
+}

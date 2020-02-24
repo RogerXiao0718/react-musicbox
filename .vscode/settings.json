@@ -1,0 +1,4 @@
+{
+    "emulator.androidColdBoot": true,
+    "emulator.emulatorPathWindows": "C:\\Users\\deo24\\AppData\\Local\\Android\\Sdk\\emulator\\emulator.exe"
+}

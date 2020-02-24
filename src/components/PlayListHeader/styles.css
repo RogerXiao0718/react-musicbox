@@ -1,0 +1,88 @@
+.play-list-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.play-list-header .list-thumbnail {
+  width: 120px;
+  height: 120px;
+  box-shadow: 0 0 9px #999;
+  margin-right: 20px;
+}
+
+.play-list-header .list-header-r {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px 0;
+  box-sizing: border-box;
+}
+
+.play-list-header .list-header-r .play-list-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.play-list-header .list-detail {
+  color: #777;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.play-list-header .header-ctrls {
+  display: flex;
+  align-items: flex-start;
+  white-space: nowrap;
+}
+.play-list-header .play-state-ctrl {
+  padding: 8px 20px;
+  background: white;
+  border: none;
+  color: #0984e3;
+  border: 1px solid #b2bec3;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 8px;
+  transition: 0.2s;
+}
+
+.play-list-header .play-state-ctrl:hover {
+  box-shadow: 0px 0px 4px #999;
+}
+
+.play-list-header .del-ctrl:hover {
+  color: white;
+  background-color: #0984e3;
+}
+
+.play-list-header .ctrl-checked {
+  color: white;
+  background-color: #0984e3;
+}
+
+@media (max-width: 920px) {
+  .play-list-header {
+    margin-bottom: 10px;
+    justify-content: center;
+  }
+  .play-list-header .list-thumbnail {
+    width: 100px;
+    height: 100px;
+  }
+  .play-list-header .header-ctrls {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .play-list-header .list-thumbnail {
+    width: 60px;
+    height: 60px;
+  }
+}

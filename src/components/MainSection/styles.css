@@ -1,0 +1,37 @@
+.main-section {
+  position: fixed;
+  top: 60px;
+  left: 220px;
+  right: 0;
+  bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.main-section::-webkit-scrollbar {
+  background: transparent;
+  width: 8px;
+  margin-right: 2px;
+}
+
+.main-section::-webkit-scrollbar-thumb {
+  width: 8px;
+  border-radius: 4px;
+  background-color: #3498db;
+}
+
+@media (max-width: 920px) {
+  .main-section {
+    left: 0;
+    padding: 10px 5px;
+  }
+}
+
+@media (max-width: 500px) {
+  .main-section::-webkit-scrollbar {
+    display: none;
+  }
+}
