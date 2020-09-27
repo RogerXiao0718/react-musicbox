@@ -17,7 +17,7 @@ const PlayControllerBase = ({
   currVideoTitle,
   currDuration,
   currTimeInSeconds,
-  dispatch
+  dispatch,
 }) => {
   // const [currVideoName, setCurrVideoName] = useState("");
 
@@ -27,21 +27,22 @@ const PlayControllerBase = ({
         params: {
           id: videoId,
           key: KEY,
-          part: "snippet, contentDetails"
-        }
+          part: "snippet, contentDetails",
+        },
       })
-      .then(response => {
+      .then((response) => {
+        const item = response.data.items[0];
         dispatch({
           type: "SET_CURR_TITLE",
-          currVideoTitle: response.data.items[0].snippet.title
+          currVideoTitle: item.snippet.title,
         });
         dispatch({
           type: "SET_CURR_DURATION",
-          currDuration: response.data.items[0].contentDetails.duration
+          currDuration: item.contentDetails.duration,
         });
-        // setCurrVideoName(response.data.items[0].snippet.title);
+        // setCurrVideoName(item.snippet.title);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }, [dispatch, videoId]);
@@ -49,72 +50,72 @@ const PlayControllerBase = ({
   const controlBtnClasses = classnames({
     ctrl: true,
     "pause-btn": !isPause,
-    "play-btn": isPause
+    "play-btn": isPause,
   });
 
-  const onPlayStateClick = event => {
+  const onPlayStateClick = (event) => {
     if (isPause) {
       player.playVideo();
     } else {
       player.pauseVideo();
     }
     dispatch({
-      type: "CHANGE_PLAYSTATE"
+      type: "CHANGE_PLAYSTATE",
     });
   };
 
-  const onPreClick = event => {
+  const onPreClick = (event) => {
     dispatch({
       type: "SET_CURR_INDEX",
-      index: currIndex === 0 ? currPlayList.length - 1 : currIndex - 1
+      index: currIndex === 0 ? currPlayList.length - 1 : currIndex - 1,
     });
     dispatch({
       type: "SET_CURR_VIDEO",
       id:
-        currPlayList[currIndex === 0 ? currPlayList.length - 1 : currIndex - 1]
+        currPlayList[currIndex === 0 ? currPlayList.length - 1 : currIndex - 1],
     });
     player.loadVideoById(
       currPlayList[currIndex === 0 ? currPlayList.length - 1 : currIndex - 1]
     );
     if (isPause) {
       dispatch({
-        type: "CHANGE_PLAYSTATE"
+        type: "CHANGE_PLAYSTATE",
       });
     }
   };
 
-  const onNextClick = event => {
+  const onNextClick = (event) => {
     dispatch({
       type: "SET_CURR_INDEX",
-      index: (currIndex + 1) % currPlayList.length
+      index: (currIndex + 1) % currPlayList.length,
     });
     dispatch({
       type: "SET_CURR_VIDEO",
-      id: currPlayList[(currIndex + 1) % currPlayList.length]
+      id: currPlayList[(currIndex + 1) % currPlayList.length],
     });
     player.loadVideoById(currPlayList[(currIndex + 1) % currPlayList.length]);
     if (isPause) {
       dispatch({
-        type: "CHANGE_PLAYSTATE"
+        type: "CHANGE_PLAYSTATE",
       });
     }
   };
 
-  const onVolumeChange = event => {
+  const onVolumeChange = (event) => {
     player.setVolume(event.target.value);
   };
 
-  const onSliderChanged = event => {
+  const onSliderChanged = (event) => {
     player.seekTo(event.target.value);
     if (isPause) {
+      player.playVideo();
       dispatch({
-        type: "CHANGE_PLAYSTATE"
+        type: "CHANGE_PLAYSTATE",
       });
     }
-
     dispatch({
       type: "CHANGE_CURRENT_TIME",
-      value: parseInt(event.target.value)
+      value: parseInt(event.target.value),
     });
   };
 
@@ -196,7 +197,7 @@ const PlayControllerBase = ({
   );
 };
 
-const PlayController = connect(state => ({
+const PlayController = connect((state) => ({
   videoId: state.player.currVideoId,
   player: state.player.currPlayer,
   isPause: state.player.isPause,
@@ -204,7 +205,7 @@ const PlayController = connect(state => ({
   currPlayList: state.player.currPlayList,
   currVideoTitle: state.player.currVideoTitle,
   currDuration: state.player.currDuration,
-  currTimeInSeconds: state.player.currTimeInSeconds
+  currTimeInSeconds: state.player.currTimeInSeconds,
 }))(PlayControllerBase);
 
 export default PlayController;

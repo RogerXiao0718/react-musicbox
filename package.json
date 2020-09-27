@@ -13,13 +13,13 @@
     "iso8601-duration": "^1.2.0",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^2.0.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-redux": "^7.1.0",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "^3.3.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.4.3",
     "react-with-gesture": "^4.0.8",
-    "react-youtube": "^7.9.0",
+    "react-youtube": "^7.12.0",
     "redux": "^4.0.1"
   },
   "scripts": {
@@ -44,7 +44,7 @@
     ]
   },
   "devDependencies": {
-    "eslint-plugin-react": "^7.14.2"
+    "eslint-plugin-react": "^7.21.2"
   },
   "proxy": "http://localhost:4000"
 }

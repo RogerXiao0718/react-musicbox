@@ -12,34 +12,34 @@ const SideBarBase = ({
   currIndex,
   isPause,
   player,
-  dispatch
+  dispatch,
 }) => {
   const [intervalId, setIntervalId] = useState(0);
 
-  const onReady = event => {
+  const onReady = (event) => {
     dispatch({
       type: "SET_CURR_PLAYER",
-      newPlayer: event.target
+      newPlayer: event.target,
     });
   };
 
-  const onVideoStatusChanged = event => {
+  const onVideoStatusChanged = (event) => {
     switch (event.data) {
       case 0:
         dispatch({
           type: "SET_CURR_INDEX",
-          index: (currIndex + 1) % currPlayList.length
+          index: (currIndex + 1) % currPlayList.length,
         });
         dispatch({
           type: "SET_CURR_VIDEO",
-          id: currPlayList[(currIndex + 1) % currPlayList.length]
+          id: currPlayList[(currIndex + 1) % currPlayList.length],
         });
         player.loadVideoById(
           currPlayList[(currIndex + 1) % currPlayList.length]
         );
         if (isPause) {
           dispatch({
-            type: "CHANGE_PLAYSTATE"
+            type: "CHANGE_PLAYSTATE",
           });
         }
         clearInterval(intervalId);
@@ -50,7 +50,7 @@ const SideBarBase = ({
           setInterval(() => {
             dispatch({
               // type: "INCREASE_CURR_TIME"
-              type: "UPDATE_CURRENT_TIME"
+              type: "UPDATE_CURRENT_TIME",
             });
           }, 200)
         );
@@ -62,39 +62,6 @@ const SideBarBase = ({
         clearInterval(intervalId);
         break;
     }
-    // if (event.data === 0) {
-    //   dispatch({
-    //     type: "SET_CURR_INDEX",
-    //     index: (currIndex + 1) % currPlayList.length
-    //   });
-    //   dispatch({
-    //     type: "SET_CURR_VIDEO",
-    //     id: currPlayList[(currIndex + 1) % currPlayList.length]
-    //   });
-    //   player.loadVideoById(currPlayList[(currIndex + 1) % currPlayList.length]);
-    //   if (isPause) {
-    //     dispatch({
-    //       type: "CHANGE_PLAYSTATE"
-    //     });
-    //   }
-    //   clearInterval(intervalId);
-    // }
-    // if (event.data === 1) {
-    //   clearInterval(intervalId);
-    //   setIntervalId(
-    //     setInterval(() => {
-    //       dispatch({
-    //         type: "INCREASE_CURR_TIME"
-    //       });
-    //     }, 1000)
-    //   );
-    // }
-    // if (event.data === 2) {
-    //   clearInterval(intervalId);
-    // }
-    // if (event.data === -1) {
-    //   clearInterval(intervalId);
-    // }
   };
 
   return (
@@ -126,8 +93,8 @@ const SideBarBase = ({
           opts={{
             playerVars: {
               loop: 1,
-              controls: 0
-            }
+              controls: 0,
+            },
           }}
           onReady={onReady}
           onStateChange={onVideoStatusChanged}
@@ -137,12 +104,12 @@ const SideBarBase = ({
   );
 };
 
-const SideBar = connect(state => ({
+const SideBar = connect((state) => ({
   currPlayList: state.player.currPlayList,
   currPlayer: state.player.currPlayer,
   currIndex: state.player.currIndex,
   isPause: state.player.isPause,
-  player: state.player.currPlayer
+  player: state.player.currPlayer,
 }))(SideBarBase);
 
 export default SideBar;

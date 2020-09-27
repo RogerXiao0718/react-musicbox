@@ -1,12 +1,15 @@
+//This is the initial playlist
 const initialPlayList = [
-  "GhrRvZOcdYE",
-  "SX_ViT4Ra7k",
+  "tKUC6vqC1kw",
+  "4PVdE4lmWxM",
+  "NJkQzZOdOsI",
   "Xm5eJum2ESI",
   "s7fTnIE2YTo",
   "m8M4OkfBsA8",
-  "uVeSf_vIeAE"
+  "uVeSf_vIeAE",
 ];
 
+//This is the initial global state of player
 const initialState = {
   currPlayList: initialPlayList,
   currVideoId: initialPlayList[0],
@@ -16,73 +19,74 @@ const initialState = {
   currPlayState: "play",
   currPlayer: null,
   currIndex: 0,
-  isPause: true
+  isPause: true,
 };
 
+//Define playerReducer for redux store
 const playerReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SET_CURR_VIDEO":
       return {
         ...state,
         currVideoId: action.id,
-        currTimeInSeconds: 0
+        currTimeInSeconds: 0,
       };
     case "SET_CURR_PLAYER":
       return {
         ...state,
-        currPlayer: action.newPlayer
+        currPlayer: action.newPlayer,
       };
     case "SET_CURR_TITLE":
       return {
         ...state,
-        currVideoTitle: action.currVideoTitle
+        currVideoTitle: action.currVideoTitle,
       };
     case "SET_CURR_DURATION":
       return {
         ...state,
-        currDuration: action.currDuration
+        currDuration: action.currDuration,
       };
     case "INCREASE_CURR_TIME":
       return {
         ...state,
-        currTimeInSeconds: state.currTimeInSeconds + 1
+        currTimeInSeconds: state.currTimeInSeconds + 1,
       };
     case "CHANGE_PLAYSTATE":
       return {
         ...state,
-        isPause: !state.isPause
+        isPause: !state.isPause,
       };
     case "SET_CURR_INDEX":
       return {
         ...state,
-        currIndex: action.index
+        currIndex: action.index,
       };
     case "ADD_VIDEO":
       return {
         ...state,
-        currPlayList: [action.videoId, ...state.currPlayList]
+        currPlayList: [action.videoId, ...state.currPlayList],
       };
     case "DELETE_VIDEO":
       return {
         ...state,
         currPlayList: state.currPlayList.filter(
           (videoId, index) => index !== action.index
-        )
+        ),
       };
     case "CURR_TIME_TO_ZERO":
       return {
         ...state,
-        currTimeInSeconds: 0
+        currTimeInSeconds: 0,
       };
     case "UPDATE_CURRENT_TIME":
       return {
         ...state,
-        currTimeInSeconds: Math.floor(state.currPlayer.getCurrentTime())
+        currTimeInSeconds: Math.floor(state.currPlayer.getCurrentTime()),
       };
     case "CHANGE_CURRENT_TIME":
       return {
         ...state,
-        currTimeInSeconds: action.value
+        currTimeInSeconds: action.value,
       };
     default:
       return state;
