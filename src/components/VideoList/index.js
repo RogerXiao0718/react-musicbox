@@ -9,14 +9,14 @@ const VideoListBase = ({ currPlayList }) => {
   return (
     <div className="video-list">
       {currPlayList.map((videoId, index) => (
-        <VideoItem index={index} videoId={videoId} />
+        <VideoItem index={index} videoId={videoId} key={index} />
       ))}
     </div>
   );
 };
 
-const VideoList = connect(state => ({
-  currPlayList: state.player.currPlayList
+const VideoList = connect((state) => ({
+  currPlayList: state.player.currPlayList,
 }))(VideoListBase);
 
 export default VideoList;

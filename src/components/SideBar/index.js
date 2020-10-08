@@ -61,6 +61,8 @@ const SideBarBase = ({
       case -1:
         clearInterval(intervalId);
         break;
+      default:
+        break;
     }
   };
 
