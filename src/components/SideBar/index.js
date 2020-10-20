@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 import Youtube from "react-youtube";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import "./styles.css";
 
 import appStoreImg from "./apple-app-store.png";
 import gglPlayImg from "./google-play-store.png";
 
-const SideBarBase = ({
-  currPlayList,
-  currIndex,
-  isPause,
-  player,
-  dispatch,
-}) => {
+const SideBar = () => {
   const [intervalId, setIntervalId] = useState(0);
+  const { currPlayList, currIndex, isPause, player } = useSelector((state) => ({
+    currPlayList: state.player.currPlayList,
+    currPlayer: state.player.currPlayer,
+    currIndex: state.player.currIndex,
+    isPause: state.player.isPause,
+    player: state.player.currPlayer,
+  }));
+  const dispatch = useDispatch();
 
   const onReady = (event) => {
     dispatch({
@@ -49,7 +51,6 @@ const SideBarBase = ({
         setIntervalId(
           setInterval(() => {
             dispatch({
-              // type: "INCREASE_CURR_TIME"
               type: "UPDATE_CURRENT_TIME",
             });
           }, 200)
@@ -105,13 +106,5 @@ const SideBarBase = ({
     </div>
   );
 };
-
-const SideBar = connect((state) => ({
-  currPlayList: state.player.currPlayList,
-  currPlayer: state.player.currPlayer,
-  currIndex: state.player.currIndex,
-  isPause: state.player.isPause,
-  player: state.player.currPlayer,
-}))(SideBarBase);
 
 export default SideBar;
