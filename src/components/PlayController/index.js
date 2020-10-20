@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import classnames from "classnames";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { parse, toSeconds } from "iso8601-duration";
 import TimeFormat from "hh-mm-ss";
 
@@ -8,18 +8,28 @@ import youtubeApi, { KEY } from "../../apis/youtubeApi";
 
 import "./styles.css";
 
-const PlayControllerBase = ({
-  videoId,
-  player,
-  isPause,
-  currIndex,
-  currPlayList,
-  currVideoTitle,
-  currDuration,
-  currTimeInSeconds,
-  dispatch,
-}) => {
+const PlayController = () => {
   // const [currVideoName, setCurrVideoName] = useState("");
+  const {
+    videoId,
+    player,
+    isPause,
+    currIndex,
+    currPlayList,
+    currVideoTitle,
+    currDuration,
+    currTimeInSeconds,
+  } = useSelector((state) => ({
+    videoId: state.player.currVideoId,
+    player: state.player.currPlayer,
+    isPause: state.player.isPause,
+    currIndex: state.player.currIndex,
+    currPlayList: state.player.currPlayList,
+    currVideoTitle: state.player.currVideoTitle,
+    currDuration: state.player.currDuration,
+    currTimeInSeconds: state.player.currTimeInSeconds,
+  }));
+  const dispatch = useDispatch();
 
   useEffect(() => {
     youtubeApi
@@ -196,16 +206,5 @@ const PlayControllerBase = ({
     </div>
   );
 };
-
-const PlayController = connect((state) => ({
-  videoId: state.player.currVideoId,
-  player: state.player.currPlayer,
-  isPause: state.player.isPause,
-  currIndex: state.player.currIndex,
-  currPlayList: state.player.currPlayList,
-  currVideoTitle: state.player.currVideoTitle,
-  currDuration: state.player.currDuration,
-  currTimeInSeconds: state.player.currTimeInSeconds,
-}))(PlayControllerBase);
 
 export default PlayController;

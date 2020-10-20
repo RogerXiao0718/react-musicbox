@@ -1,29 +1,30 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import logo from "./mb-logo-140.png";
 import "./styles.css";
 
-const HeaderBase = ({ dispatch }) => {
+const Header = () => {
   const [addVideoId, setAddVideoId] = useState("");
   const [isSearchAppend, setSearchAppend] = useState(false);
 
   const isInputValid = addVideoId.trim() !== "";
+  const dispatch = useDispatch();
 
-  const onAddInputChange = event => {
+  const onAddInputChange = (event) => {
     setAddVideoId(event.target.value);
   };
 
-  const onAddVideoClick = event => {
+  const onAddVideoClick = (event) => {
     dispatch({
       type: "ADD_VIDEO",
-      videoId: addVideoId
+      videoId: addVideoId,
     });
     event.preventDefault();
   };
 
-  const onSmallSearchClick = event => {
+  const onSmallSearchClick = (event) => {
     setSearchAppend(!isSearchAppend);
   };
 
@@ -102,10 +103,5 @@ const HeaderBase = ({ dispatch }) => {
     </header>
   );
 };
-
-const Header = connect(
-  null,
-  null
-)(HeaderBase);
 
 export default Header;

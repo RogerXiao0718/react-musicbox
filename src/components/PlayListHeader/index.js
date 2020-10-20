@@ -1,42 +1,48 @@
 import React, { useState } from "react";
 import classnames from "classnames";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
 import "./styles.css";
 
-const PlayListHeaderBase = ({ currPlayList, player, dispatch }) => {
+const PlayListHeader = () => {
   const [isRandomChecked, setRandomChecked] = useState(false);
   const [isAmplifyChecked, setAmplifyChecked] = useState(false);
   const [isLoopChecked, setLoopChecked] = useState(false);
   const [isHDChecked, setHDChecked] = useState(false);
 
+  const { currPlayList } = useSelector((state) => {
+    return {
+      currPlayList: state.player.currPlayList,
+    };
+  });
+
   const ranClasses = classnames({
     "play-state-ctrl": true,
-    "ctrl-checked": isRandomChecked
+    "ctrl-checked": isRandomChecked,
   });
   const ampClasses = classnames({
     "play-state-ctrl": true,
-    "ctrl-checked": isAmplifyChecked
+    "ctrl-checked": isAmplifyChecked,
   });
   const loopClasses = classnames({
     "play-state-ctrl": true,
-    "ctrl-checked": isLoopChecked
+    "ctrl-checked": isLoopChecked,
   });
   const hdClasses = classnames({
     "play-state-ctrl": true,
-    "ctrl-checked": isHDChecked
+    "ctrl-checked": isHDChecked,
   });
 
-  const onRandomClick = event => {
+  const onRandomClick = (event) => {
     setRandomChecked(!isRandomChecked);
   };
-  const onAmplifyClick = event => {
+  const onAmplifyClick = (event) => {
     setAmplifyChecked(!isAmplifyChecked);
   };
-  const onLoopClick = event => {
+  const onLoopClick = (event) => {
     setLoopChecked(!isLoopChecked);
   };
-  const onHDClick = event => {
+  const onHDClick = (event) => {
     setHDChecked(!isHDChecked);
   };
 
@@ -69,10 +75,5 @@ const PlayListHeaderBase = ({ currPlayList, player, dispatch }) => {
     </div>
   );
 };
-
-const PlayListHeader = connect(state => ({
-  currPlayList: state.player.currPlayList,
-  player: state.player.currPlayer
-}))(PlayListHeaderBase);
 
 export default PlayListHeader;

@@ -1,11 +1,14 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
 import VideoItem from "../VideoItem";
 
 import "./styles.css";
 
-const VideoListBase = ({ currPlayList }) => {
+const VideoList = () => {
+  const { currPlayList } = useSelector((state) => ({
+    currPlayList: state.player.currPlayList,
+  }));
   return (
     <div className="video-list">
       {currPlayList.map((videoId, index) => (
@@ -14,9 +17,5 @@ const VideoListBase = ({ currPlayList }) => {
     </div>
   );
 };
-
-const VideoList = connect((state) => ({
-  currPlayList: state.player.currPlayList,
-}))(VideoListBase);
 
 export default VideoList;
