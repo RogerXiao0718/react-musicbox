@@ -78,17 +78,8 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         currTimeInSeconds: 0,
       };
-    case "UPDATE_CURRENT_TIME":
-      return {
-        ...state,
-        currTimeInSeconds: Math.floor(state.currPlayer.getCurrentTime()),
-      };
-    case "CHANGE_CURRENT_TIME":
-      return {
-        ...state,
-        currTimeInSeconds: action.value,
-      };
     default:
+      console.log(`Undefined action type ${action.type}`);
       return state;
   }
 };

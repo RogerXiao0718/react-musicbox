@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import classnames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import { parse, toSeconds } from "iso8601-duration";
@@ -9,7 +9,6 @@ import youtubeApi, { KEY } from "../../apis/youtubeApi";
 import "./styles.css";
 
 const PlayController = () => {
-  // const [currVideoName, setCurrVideoName] = useState("");
   const {
     videoId,
     player,
@@ -18,7 +17,6 @@ const PlayController = () => {
     currPlayList,
     currVideoTitle,
     currDuration,
-    currTimeInSeconds,
   } = useSelector((state) => ({
     videoId: state.player.currVideoId,
     player: state.player.currPlayer,
@@ -27,9 +25,10 @@ const PlayController = () => {
     currPlayList: state.player.currPlayList,
     currVideoTitle: state.player.currVideoTitle,
     currDuration: state.player.currDuration,
-    currTimeInSeconds: state.player.currTimeInSeconds,
   }));
   const dispatch = useDispatch();
+
+  const [currTimeInSecond, setCurrTimeInSecond] = useState(0);
 
   useEffect(() => {
     youtubeApi
@@ -50,12 +49,23 @@ const PlayController = () => {
           type: "SET_CURR_DURATION",
           currDuration: item.contentDetails.duration,
         });
-        // setCurrVideoName(item.snippet.title);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [dispatch, videoId]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (player) {
+        const timeInSecond = Math.floor(player.getCurrentTime());
+        setCurrTimeInSecond(timeInSecond);
+      }
+    }, 500);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [player]);
 
   const controlBtnClasses = classnames({
     ctrl: true,
@@ -123,10 +133,7 @@ const PlayController = () => {
         type: "CHANGE_PLAYSTATE",
       });
     }
-    dispatch({
-      type: "CHANGE_CURRENT_TIME",
-      value: parseInt(event.target.value),
-    });
+    setCurrTimeInSecond(parseInt(event.target.value));
   };
 
   return (
@@ -138,12 +145,12 @@ const PlayController = () => {
         min={0}
         max={currDuration ? toSeconds(parse(currDuration)) : 0}
         onChange={onSliderChanged}
-        value={currTimeInSeconds}
+        value={currTimeInSecond}
       />
       <div className="time-duration-section">
         <span>
           {TimeFormat.fromS(
-            !isNaN(currTimeInSeconds) ? currTimeInSeconds : 0,
+            !isNaN(currTimeInSecond) ? currTimeInSecond : 0,
             "mm:ss"
           )}
         </span>

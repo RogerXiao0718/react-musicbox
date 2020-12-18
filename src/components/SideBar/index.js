@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Youtube from "react-youtube";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -8,7 +8,6 @@ import appStoreImg from "./apple-app-store.png";
 import gglPlayImg from "./google-play-store.png";
 
 const SideBar = () => {
-  const [intervalId, setIntervalId] = useState(0);
   const { currPlayList, currIndex, isPause, player } = useSelector((state) => ({
     currPlayList: state.player.currPlayList,
     currPlayer: state.player.currPlayer,
@@ -27,7 +26,11 @@ const SideBar = () => {
 
   const onVideoStatusChanged = (event) => {
     switch (event.data) {
+      case -1:
+        // unstarted
+        break;
       case 0:
+        // ended
         dispatch({
           type: "SET_CURR_INDEX",
           index: (currIndex + 1) % currPlayList.length,
@@ -44,23 +47,12 @@ const SideBar = () => {
             type: "CHANGE_PLAYSTATE",
           });
         }
-        clearInterval(intervalId);
         break;
       case 1:
-        clearInterval(intervalId);
-        setIntervalId(
-          setInterval(() => {
-            dispatch({
-              type: "UPDATE_CURRENT_TIME",
-            });
-          }, 200)
-        );
+        // playing
         break;
       case 2:
-        clearInterval(intervalId);
-        break;
-      case -1:
-        clearInterval(intervalId);
+        // paused
         break;
       default:
         break;
