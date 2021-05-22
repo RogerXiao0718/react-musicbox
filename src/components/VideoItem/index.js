@@ -1,63 +1,39 @@
-import React, { useEffect, useState } from "react";
-import { KEY } from "../../apis/youtubeApi";
-import { parse, toSeconds } from "iso8601-duration";
+import React from "react";
+import { toSeconds } from "iso8601-duration";
 import { connect } from "react-redux";
 import TimeFormat from "hh-mm-ss";
 
 import "./styles.css";
 
-const VideoItemBase = ({ index, videoId, player, isPause, dispatch }) => {
-  const [title, setTitle] = useState("");
-  const [duration, setDuration] = useState("");
-
-  const onDeleteClick = event => {
+const VideoItemBase = ({
+  index,
+  videoId,
+  title,
+  duration,
+  player,
+  isPause,
+  dispatch,
+}) => {
+  const onDeleteClick = (event) => {
     dispatch({
       type: "DELETE_VIDEO",
-      index: index
+      index: index,
     });
   };
 
-  useEffect(() => {
-    // youtubeApi
-    //   .get("/videos", {
-    //     params: {
-    //       key: KEY,
-    //       part: "snippet, contentDetails",
-    //       id: videoId
-    //     }
-    //   })
-    //   .then(response => {
-    //     setTitle(response.data.items[0].snippet.title);
-    //     setDuration(parse(response.data.items[0].contentDetails.duration));
-    //   });
-    fetch(
-      `https://www.googleapis.com/youtube/v3/videos?part=snippet, contentDetails&id=${videoId}&key=${KEY}`
-    )
-      .then(response => response.json())
-      .then(data => {
-        if (data.items[0]) {
-          setTitle(data.items[0].snippet.title);
-          setDuration(parse(data.items[0].contentDetails.duration));
-        } else {
-          setTitle("music not found!");
-          setDuration(0);
-        }
-      });
-  }, [videoId]);
-
-  const onVideoItemClick = event => {
+  const onVideoItemClick = (event) => {
     dispatch({
       type: "SET_CURR_VIDEO",
-      id: videoId
+      id: videoId,
     });
     dispatch({
       type: "SET_CURR_INDEX",
-      index: index
+      index: index,
     });
     player.loadVideoById(videoId);
     if (isPause) {
       dispatch({
-        type: "CHANGE_PLAYSTATE"
+        type: "CHANGE_PLAYSTATE",
       });
     }
   };
@@ -85,9 +61,9 @@ const VideoItemBase = ({ index, videoId, player, isPause, dispatch }) => {
   );
 };
 
-const VideoItem = connect(state => ({
+const VideoItem = connect((state) => ({
   player: state.player.currPlayer,
-  isPause: state.player.isPause
+  isPause: state.player.isPause,
 }))(VideoItemBase);
 
 export default VideoItem;

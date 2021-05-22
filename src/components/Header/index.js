@@ -7,7 +7,7 @@ import "./styles.css";
 
 const Header = () => {
   const [addVideoId, setAddVideoId] = useState("");
-  const [isSearchAppend, setSearchAppend] = useState(false);
+  const [isSearchExpand, setIsSearchExpand] = useState(false);
 
   const isInputValid = addVideoId.trim() !== "";
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const Header = () => {
   };
 
   const onSmallSearchClick = (event) => {
-    setSearchAppend(!isSearchAppend);
+    setIsSearchExpand(!isSearchExpand);
   };
 
   return (
@@ -33,19 +33,6 @@ const Header = () => {
       <Link className="logo" to="/">
         <img src={logo} alt="logo" />
       </Link>
-      {/* <form className="search-form">
-        <i className="fas fa-search" />
-        <input
-          className={searchBoxClasses}
-          onFocus={searchOnFocus}
-          onBlur={searchWithoutFocus}
-          type="text"
-          placeholder="搜尋音樂"
-        />
-        <button className="search-btn" type="submit">
-          搜尋
-        </button>
-      </form> */}
       <form className="add-v-form">
         <i className="fas fa-search" />
         <input
@@ -80,7 +67,7 @@ const Header = () => {
         </button>
         <div
           className="apd-search-section"
-          style={{ display: isSearchAppend ? "block" : "none" }}
+          style={{ display: isSearchExpand ? "block" : "none" }}
         >
           <form className="apd-search-form">
             <input

@@ -33,16 +33,16 @@ const PlayListHeader = () => {
     "ctrl-checked": isHDChecked,
   });
 
-  const onRandomClick = (event) => {
+  const onRandomClick = () => {
     setRandomChecked(!isRandomChecked);
   };
-  const onAmplifyClick = (event) => {
+  const onAmplifyClick = () => {
     setAmplifyChecked(!isAmplifyChecked);
   };
-  const onLoopClick = (event) => {
+  const onLoopClick = () => {
     setLoopChecked(!isLoopChecked);
   };
-  const onHDClick = (event) => {
+  const onHDClick = () => {
     setHDChecked(!isHDChecked);
   };
 

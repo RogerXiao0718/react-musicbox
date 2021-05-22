@@ -52,9 +52,12 @@ const playerReducer = (state = initialState, action) => {
         currTimeInSeconds: state.currTimeInSeconds + 1,
       };
     case "CHANGE_PLAYSTATE":
+      const newIsPause = !state.isPause;
+      if (newIsPause) state.currPlayer.pauseVideo();
+      else state.currPlayer.playVideo();
       return {
         ...state,
-        isPause: !state.isPause,
+        isPause: newIsPause,
       };
     case "SET_CURR_INDEX":
       return {

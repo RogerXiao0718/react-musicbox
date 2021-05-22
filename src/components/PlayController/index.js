@@ -74,11 +74,6 @@ const PlayController = () => {
   });
 
   const onPlayStateClick = (event) => {
-    if (isPause) {
-      player.playVideo();
-    } else {
-      player.pauseVideo();
-    }
     dispatch({
       type: "CHANGE_PLAYSTATE",
     });
@@ -128,7 +123,6 @@ const PlayController = () => {
   const onSliderChanged = (event) => {
     player.seekTo(event.target.value);
     if (isPause) {
-      player.playVideo();
       dispatch({
         type: "CHANGE_PLAYSTATE",
       });
