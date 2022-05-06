@@ -6,7 +6,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #00a8ff;
+  background-color: #f19a12;
   padding: 0 20px 0 40px;
   margin: 0;
   box-sizing: border-box;
@@ -21,6 +21,10 @@
 
 .logo {
   margin-right: 50px;
+  color: white;
+  text-decoration: none;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-style: italic
 }
 
 .header .add-v-form {
@@ -50,7 +54,8 @@
 .header .add-v-btn {
   padding: 8px 30px;
   color: white;
-  background: #2980b9;
+  font-weight: bold;
+  background: #f1c40f;
   border: none;
   border-radius: 5px;
   font-size: 14px;
@@ -130,10 +135,12 @@
   .header .logo {
     margin-right: 30px;
   }
+
   .header .add-v-form {
     margin-left: auto;
     margin-right: auto;
   }
+
   .header .social-link {
     display: none;
   }
@@ -143,13 +150,16 @@
   .header {
     padding: 10px;
   }
+
   .header .add-v-form {
     display: none;
   }
+
   .header .lsb-container {
     display: block;
     margin-left: auto;
   }
+
   .header .apd-search-section {
     display: block;
   }

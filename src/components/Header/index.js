@@ -31,7 +31,7 @@ const Header = () => {
   return (
     <header className="header">
       <Link className="logo" to="/">
-        <img src={logo} alt="logo" />
+        <h1>RogerBox</h1>
       </Link>
       <form className="add-v-form">
         <i className="fas fa-search" />

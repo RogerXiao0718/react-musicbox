@@ -58,7 +58,7 @@
   border: none;
   cursor: pointer;
   outline: none;
-  color: #3498db;
+  color: #e74c3c;
   font-size: 18px;
   transition: 0.2s;
   white-space: nowrap;
@@ -66,7 +66,7 @@
 }
 
 .video-item .vi-item-r button:hover {
-  color: #2980b9;
+  color: #c0392b;
 }
 
 .video-item .vi-item-r button i {
@@ -79,9 +79,11 @@
     width: 60px;
     height: 48px;
   }
+
   .video-item .vi-title {
     font-size: 14px;
   }
+
   .video-item .vi-duration {
     font-size: 14px;
   }
@@ -91,6 +93,7 @@
   .video-item .vi-duration {
     display: none;
   }
+
   .video-item .vi-title {
     font-size: 12px;
   }
@@ -100,6 +103,7 @@
   .video-item .vi-index {
     display: none;
   }
+
   .video-item .vi-item-r {
     margin-right: 5px;
   }
