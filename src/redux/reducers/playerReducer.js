@@ -74,6 +74,13 @@ const playerReducer = (state = initialState, action) => {
           (videoId, index) => index !== action.index
         ),
       };
+    case "DELETE_VIDEO_BY_ID":
+      return {
+        ...state,
+        currPlayList: state.currPlayList.filter(
+          (videoId, index) => videoId !== action.videoId
+        )
+      };
     case "CURR_TIME_TO_ZERO":
       return {
         ...state,

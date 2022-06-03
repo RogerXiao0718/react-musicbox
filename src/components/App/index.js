@@ -17,12 +17,27 @@ const App = props => {
   useEffect(() => {
     if (!ReactIsInDevelopmentMode()) {
       const socket = io("localhost:4000");
+
+      socket.on("add music", (musicId) => {
+        dispatch({
+          type: "ADD_VIDEO",
+          videoId: musicId,
+        });
+      });
+
+      socket.on("delete music", (musicId) => {
+        dispatch({
+          type: "DELETE_VIDEO_BY_ID",
+          videoId: musicId,
+        });
+      });
+
       dispatch({
         type: "SET_SOCKET",
         socket: socket
       });
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="page-container">

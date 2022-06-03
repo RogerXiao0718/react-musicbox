@@ -11,10 +11,12 @@ io.on("connection", (socket) => {
 
   socket.on("add music", (musicId) => {
     console.log(`client added music ${musicId}`);
+    socket.broadcast.emit("add music", musicId);
   });
 
   socket.on("delete music", musicId => {
     console.log(`client delete music ${musicId}`);
+    socket.broadcast.emit("delete music", musicId);
   });
 });
 
