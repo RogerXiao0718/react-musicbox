@@ -157,9 +157,6 @@ const PlayController = () => {
       </div>
       <div className="play-controller">
         <div className="ctrls">
-          <button className="ctrl play-back-btn">
-            <i className="fas fa-undo-alt" />
-          </button>
           <button
             className="ctrl pre-vid-btn"
             title="previous"
@@ -184,9 +181,6 @@ const PlayController = () => {
             onClick={onNextClick}
           >
             <i className="fas fa-fast-forward" />
-          </button>
-          <button className="ctrl play-forward-btn">
-            <i className="fas fa-redo-alt" />
           </button>
           <div className="volume-container ctrl">
             <input

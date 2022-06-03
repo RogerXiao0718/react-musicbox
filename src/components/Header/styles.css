@@ -32,6 +32,7 @@
   align-items: center;
   height: 100%;
   margin-right: 50px;
+  align-self: center;
 }
 
 .header .add-v-form i {

@@ -6,9 +6,7 @@ import "./styles.css";
 
 const PlayListHeader = () => {
   const [isRandomChecked, setRandomChecked] = useState(false);
-  const [isAmplifyChecked, setAmplifyChecked] = useState(false);
   const [isLoopChecked, setLoopChecked] = useState(false);
-  const [isHDChecked, setHDChecked] = useState(false);
 
   const { currPlayList } = useSelector((state) => {
     return {
@@ -20,30 +18,16 @@ const PlayListHeader = () => {
     "play-state-ctrl": true,
     "ctrl-checked": isRandomChecked,
   });
-  const ampClasses = classnames({
-    "play-state-ctrl": true,
-    "ctrl-checked": isAmplifyChecked,
-  });
   const loopClasses = classnames({
     "play-state-ctrl": true,
     "ctrl-checked": isLoopChecked,
-  });
-  const hdClasses = classnames({
-    "play-state-ctrl": true,
-    "ctrl-checked": isHDChecked,
   });
 
   const onRandomClick = () => {
     setRandomChecked(!isRandomChecked);
   };
-  const onAmplifyClick = () => {
-    setAmplifyChecked(!isAmplifyChecked);
-  };
   const onLoopClick = () => {
     setLoopChecked(!isLoopChecked);
-  };
-  const onHDClick = () => {
-    setHDChecked(!isHDChecked);
   };
 
   return (
@@ -61,14 +45,8 @@ const PlayListHeader = () => {
           <button className={ranClasses} onClick={onRandomClick}>
             隨機撥放
           </button>
-          <button className={ampClasses} onClick={onAmplifyClick}>
-            放大
-          </button>
           <button className={loopClasses} onClick={onLoopClick}>
             單曲重複
-          </button>
-          <button className={hdClasses} onClick={onHDClick}>
-            高清
           </button>
         </div>
       </div>

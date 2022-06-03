@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-import logo from "./mb-logo-140.png";
 import "./styles.css";
 
 const Header = () => {

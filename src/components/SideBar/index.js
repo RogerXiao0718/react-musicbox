@@ -61,26 +61,6 @@ const SideBar = () => {
 
   return (
     <div className="sidebar">
-      <div className="song-list-opt">
-        <Link to="#">我的歌單</Link>
-        <Link to="#">DJs</Link>
-      </div>
-      <div className="recommend-song-opt">
-        <Link to="#">每日精選</Link>
-        <Link to="#">MixerBox Champion</Link>
-        <Link to="#">熱門榜單</Link>
-        <Link to="#">歌手</Link>
-        <Link to="#">最新發行</Link>
-        <Link to="#">曲風類型</Link>
-      </div>
-      <div className="dl-opts">
-        <button className="app-store-dl">
-          <img src={appStoreImg} alt="download from app store" />
-        </button>
-        <button className="gp-store-dl">
-          <img src={gglPlayImg} alt="download from google play" />
-        </button>
-      </div>
       <div className="youtube-drag-container">
         <Youtube
           videoId={currPlayList[0]}
