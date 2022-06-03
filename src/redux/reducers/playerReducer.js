@@ -1,12 +1,9 @@
 //This is the initial playlist
 const initialPlayList = [
-  "tKUC6vqC1kw",
-  "4PVdE4lmWxM",
-  "NJkQzZOdOsI",
-  "Xm5eJum2ESI",
-  "s7fTnIE2YTo",
-  "m8M4OkfBsA8",
-  "uVeSf_vIeAE",
+  "XSLhsjepelI",
+  "iOcE1v1cy2A",
+  "JPhEkto2YV8",
+  "f1RLl45ZWIY",
 ];
 
 //This is the initial global state of player
@@ -20,6 +17,7 @@ const initialState = {
   currPlayer: null,
   currIndex: 0,
   isPause: true,
+  playMode: "normal"
 };
 
 //Define playerReducer for redux store
@@ -80,6 +78,11 @@ const playerReducer = (state = initialState, action) => {
       return {
         ...state,
         currTimeInSeconds: 0,
+      };
+    case "CHANGE_PLAY_MODE":
+      return {
+        ...state,
+        playMode: action.newPlayMode
       };
     default:
       console.log(`Undefined action type ${action.type}`);

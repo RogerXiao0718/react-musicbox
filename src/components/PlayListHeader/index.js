@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import classnames from "classnames";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./styles.css";
 
 const PlayListHeader = () => {
   const [isRandomChecked, setRandomChecked] = useState(false);
   const [isLoopChecked, setLoopChecked] = useState(false);
+
+  const dispatch = useDispatch();
 
   const { currPlayList } = useSelector((state) => {
     return {
@@ -24,10 +26,37 @@ const PlayListHeader = () => {
   });
 
   const onRandomClick = () => {
+    // 若此次點擊為啟用時
+    if (!isRandomChecked) {
+      dispatch({
+        type: "CHANGE_PLAY_MODE",
+        newPlayMode: "random"
+      });
+    } else {
+      dispatch({
+        type: "CHANGE_PLAY_MODE",
+        newPlayMode: "normal"
+      });
+    }
     setRandomChecked(!isRandomChecked);
+    setLoopChecked(false);
   };
   const onLoopClick = () => {
+    // 若此次點擊為啟用時
+    if (!isLoopChecked) {
+      dispatch({
+        type: "CHANGE_PLAY_MODE",
+        newPlayMode: "loop"
+      });
+    } else {
+      dispatch({
+        type: "CHANGE_PLAY_MODE",
+        newPlayMode: "normal"
+      });
+    }
     setLoopChecked(!isLoopChecked);
+    setRandomChecked(false);
+
   };
 
   return (
@@ -41,7 +70,6 @@ const PlayListHeader = () => {
         <span className="play-list-name">List Name</span>
         <span className="list-detail">{`${currPlayList.length} 首歌 - 來自 XXX`}</span>
         <div className="header-ctrls">
-          <button className="play-state-ctrl del-ctrl">刪除</button>
           <button className={ranClasses} onClick={onRandomClick}>
             隨機撥放
           </button>

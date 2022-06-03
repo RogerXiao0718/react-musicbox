@@ -1,19 +1,16 @@
 import React from "react";
 import Youtube from "react-youtube";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import "./styles.css";
 
-import appStoreImg from "./apple-app-store.png";
-import gglPlayImg from "./google-play-store.png";
-
 const SideBar = () => {
-  const { currPlayList, currIndex, isPause, player } = useSelector((state) => ({
+  const { currPlayList, currIndex, isPause, player, playMode } = useSelector((state) => ({
     currPlayList: state.player.currPlayList,
     currPlayer: state.player.currPlayer,
     currIndex: state.player.currIndex,
     isPause: state.player.isPause,
     player: state.player.currPlayer,
+    playMode: state.player.playMode
   }));
   const dispatch = useDispatch();
 
@@ -31,16 +28,29 @@ const SideBar = () => {
         break;
       case 0:
         // ended
+        let nextIndex;
+
+        // 根據不同playMode指定下一首個
+        if (playMode === "normal") {
+          nextIndex = (currIndex + 1);
+        } else if (playMode === "random") {
+          do {
+            nextIndex = Math.floor(Math.random() * currPlayList.length);
+          } while (nextIndex === currIndex && currPlayList.length !== 1);
+        } else if (playMode === "loop") {
+          nextIndex = currIndex;
+        }
+
         dispatch({
           type: "SET_CURR_INDEX",
-          index: (currIndex + 1) % currPlayList.length,
+          index: nextIndex % currPlayList.length,
         });
         dispatch({
           type: "SET_CURR_VIDEO",
-          id: currPlayList[(currIndex + 1) % currPlayList.length],
+          id: currPlayList[nextIndex % currPlayList.length],
         });
         player.loadVideoById(
-          currPlayList[(currIndex + 1) % currPlayList.length]
+          currPlayList[nextIndex % currPlayList.length]
         );
         if (isPause) {
           dispatch({

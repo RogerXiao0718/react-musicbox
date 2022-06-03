@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
+import ReactIsInDevelopmentMode from "../../ReactIsInDevelopmentMode";
 
 import "./styles.css";
 
 const Header = () => {
   const [addVideoId, setAddVideoId] = useState("");
   const [isSearchExpand, setIsSearchExpand] = useState(false);
+  const { socket } = useSelector(state => ({
+    socket: state.socket.socket
+  }));
+
 
   const isInputValid = addVideoId.trim() !== "";
   const dispatch = useDispatch();
@@ -16,11 +22,14 @@ const Header = () => {
   };
 
   const onAddVideoClick = (event) => {
+    event.preventDefault();
     dispatch({
       type: "ADD_VIDEO",
       videoId: addVideoId,
     });
-    event.preventDefault();
+    if (!ReactIsInDevelopmentMode()) {
+      socket.emit("add music", addVideoId);
+    }
   };
 
   const onSmallSearchClick = (event) => {

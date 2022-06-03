@@ -1,24 +1,34 @@
 import React from "react";
 import { toSeconds } from "iso8601-duration";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TimeFormat from "hh-mm-ss";
+import ReactIsInDevelopmentMode from "../../ReactIsInDevelopmentMode";
 
 import "./styles.css";
 
-const VideoItemBase = ({
+const VideoItem = ({
   index,
   videoId,
   title,
   duration,
-  player,
-  isPause,
-  dispatch,
 }) => {
+
+  const { player, isPause, socket } = useSelector((state) => ({
+    player: state.player.currPlayer,
+    isPause: state.player.isPause,
+    socket: state.socket.socket
+  }));
+
+  const dispatch = useDispatch();
+
   const onDeleteClick = (event) => {
     dispatch({
       type: "DELETE_VIDEO",
       index: index,
     });
+    if (!ReactIsInDevelopmentMode()) {
+      socket.emit("delete music", videoId);
+    }
   };
 
   const onVideoItemClick = (event) => {
@@ -61,9 +71,5 @@ const VideoItemBase = ({
   );
 };
 
-const VideoItem = connect((state) => ({
-  player: state.player.currPlayer,
-  isPause: state.player.isPause,
-}))(VideoItemBase);
 
 export default VideoItem;

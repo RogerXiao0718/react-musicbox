@@ -76,8 +76,9 @@
     width: 100px;
     height: 100px;
   }
-  .play-list-header .header-ctrls {
-    display: none;
+  .play-list-header .play-state-ctrl {
+    padding: 2px 5px;
+    font-size: 12px;
   }
 }
 
