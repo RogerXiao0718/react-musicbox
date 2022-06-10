@@ -1,9 +1,11 @@
 //This is the initial playlist
 const initialPlayList = [
-  "XSLhsjepelI",
+  "y719NPMmFdc",
   "iOcE1v1cy2A",
   "JPhEkto2YV8",
-  "f1RLl45ZWIY",
+  "K-8KurA4SPE",
+  "V288kKCowoE",
+  "IHJh4IXTBeE"
 ];
 
 //This is the initial global state of player
